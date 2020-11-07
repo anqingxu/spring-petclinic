@@ -23,13 +23,13 @@ pipeline {
         container('docker') {
           //https://www.brightbox.com/blog/2018/01/22/push-builds-to-dockerhub/
           withDockerRegistry([ credentialsId: "dockerhub_id", url: "" ]) {
-            sh "docker build -t anqingxu/petclinic:v1.0.1 ."
-            sh "docker push anqingxu/petclinic:v1.0.1"
+            sh "docker build -t anqingxu/petclinic:v1.0.2 ."
+            sh "docker push anqingxu/petclinic:v1.0.2"
           }
 
           //script{
             //https://stackoverflow.com/questions/59084989/push-to-ecr-from-jenkins-pipeline
-            //dockerImage = docker.build registry + "/anqingxu/petclinic:v1.0.1"
+            //dockerImage = docker.build registry + "/anqingxu/petclinic:v1.0.2"
 
             //cleanup current user docker credentials
             //sh 'rm  ~/.dockercfg || true'
