@@ -25,7 +25,7 @@ pipeline {
             //https://stackoverflow.com/questions/59084989/push-to-ecr-from-jenkins-pipeline
             dockerImage = docker.build registry + "/anqingxu/petclinic:v1.0.3"
 
-            cleanup current user docker credentials
+            //cleanup current user docker credentials
             sh 'rm ~/.dockercfg || true'
             sh 'rm ~/.docker/config.json || true'
 
