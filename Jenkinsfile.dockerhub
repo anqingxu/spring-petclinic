@@ -8,6 +8,10 @@ pipeline {
     }
   }
 
+  triggers {
+    pollSCM 'H/2 * * * *'
+  }
+
   stages {
     stage('Build') {
       steps {  // no container directive is needed as the maven container is the default

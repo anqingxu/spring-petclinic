@@ -7,6 +7,11 @@ pipeline {
       defaultContainer 'maven'  // define a default container if more than a few stages use it, will default to jnlp container
     }
   }
+
+  triggers {
+    pollSCM 'H/2 * * * *'
+  }
+
   environment {
     registry = '632912596221.dkr.ecr.us-east-1.amazonaws.com'
     registryCredential = 'ecr_id'
