@@ -6,7 +6,7 @@ pipelineJob('build-petclinic-using-jenkins-operator') {
     properties {
         pipelineTriggers {
             triggers {
-                githubPush()
+                pollSCM 'H/2 * * * *'
             }
         }
     }
@@ -21,7 +21,7 @@ pipelineJob('build-petclinic-using-jenkins-operator') {
                     branches('*/main')
                 }
             }
-            scriptPath('Jenkinsfile.ecr')
+            scriptPath('Jenkinsfile.dockerhub')
         }
     }
 }
