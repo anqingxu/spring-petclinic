@@ -46,8 +46,8 @@ pipeline {
             container('docker') {
               //https://www.brightbox.com/blog/2018/01/22/push-builds-to-dockerhub/
               withDockerRegistry([ credentialsId: "dockerhub_id", url: "" ]) {
-                sh "docker build -t anqingxu/petclinic:v1.0.13 ."
-                sh "docker push anqingxu/petclinic:v1.0.13"
+                sh "docker build -t anqingxu/petclinic:v1.0.15 ."
+                sh "docker push anqingxu/petclinic:v1.0.15"
               }
             }
           }
