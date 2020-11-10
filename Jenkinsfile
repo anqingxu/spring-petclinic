@@ -12,22 +12,45 @@ pipeline {
     pollSCM 'H/2 * * * *'
   }
 
+  options {
+    buildDiscarder logRotator(
+      daysToKeepStr: '16',
+      numToKeepStr: '10'
+    )
+  }
+
   stages {
-    stage('Build') {
-      steps {  // no container directive is needed as the maven container is the default
-        sh "mvn -B package -DskipTests"
-      }
-    }
-    stage('Build Docker Image') {
-      steps {
-        container('docker') {
-          //https://www.brightbox.com/blog/2018/01/22/push-builds-to-dockerhub/
-          withDockerRegistry([ credentialsId: "dockerhub_id", url: "" ]) {
-            sh "docker build -t anqingxu/petclinic:v1.0.8 ."
-            sh "docker push anqingxu/petclinic:v1.0.8"
+      stage('Build') {
+          steps {  // no container directive is needed as the maven container is the default
+            sh "mvn -B package -DskipTests"
           }
+      }
+      stage(' Unit Testing') {
+        steps {
+          sh """
+          echo "Running Unit Tests"
+          """
         }
       }
-    }
+
+      stage('Code Analysis') {
+        steps {
+          sh """
+          echo "Running Code Analysis"
+          """
+        }
+      }
+
+      stage('Build and publish Docker Image') {
+          steps {
+            container('docker') {
+              //https://www.brightbox.com/blog/2018/01/22/push-builds-to-dockerhub/
+              withDockerRegistry([ credentialsId: "dockerhub_id", url: "" ]) {
+                sh "docker build -t anqingxu/petclinic:v1.0.9 ."
+                sh "docker push anqingxu/petclinic:v1.0.9"
+              }
+            }
+          }
+      }
   }
 }
