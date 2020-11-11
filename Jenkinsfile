@@ -8,10 +8,6 @@ pipeline {
     }
   }
 
-  environment {
-    buildImage = '632912596221.dkr.ecr.us-east-1.amazonaws.com/petclinic:v1.0.20'
-  }
-
   triggers {
     pollSCM 'H/2 * * * *'
   }
@@ -49,7 +45,7 @@ pipeline {
           steps {
             container('kaniko') {
               script {
-                sh "/kaniko/executor --dockerfile `pwd`/Dockerfile --context `pwd` --destination=buildImage"
+                sh "/kaniko/executor --dockerfile `pwd`/Dockerfile --context `pwd` --destination=632912596221.dkr.ecr.us-east-1.amazonaws.com/petclinic:v1.0.20"
                 }
             }
           }
