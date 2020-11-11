@@ -9,7 +9,7 @@ pipeline {
   }
 
   environment {
-    buildImage = '632912596221.dkr.ecr.us-east-1.amazonaws.com/anqingxu/petclinic:v1.0.20'
+    buildImage = '632912596221.dkr.ecr.us-east-1.amazonaws.com/petclinic:v1.0.20'
   }
 
   triggers {
